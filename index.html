@@ -51,6 +51,15 @@
           if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
               throw new Error(gl.getShaderInfoLog(fragmentShader));
           }
+          const program = gl.createProgram();
+          gl.attachShader(program, vertexShader);
+          gl.attachShader(program, fragmentShader);
+          gl.linkProgram(program);
+          gl.useProgram(program);
+
+          const positionAttribute = gl.getAttribLocation(program, "position");
+          gl.enableVertexAttribArray(positionAttribute);
+          gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
         </script>
     </body>
 </html>
